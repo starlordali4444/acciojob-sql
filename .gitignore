@@ -1,0 +1,66 @@
+# ================================
+#  AccioJob SQL - .gitignore File
+# ================================
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS metadata folders
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Excel temporary and autosave files
+~$*.xlsx
+*.xlk
+*.tmp
+*.bak
+
+# VS Code and JetBrains IDE settings
+.vscode/
+.idea/
+*.iml
+out/
+
+# Logs
+*.log
+
+# Python / Databricks cache files
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.pyo
+
+# Node / npm (for potential UI or dashboard work)
+node_modules/
+dist/
+
+# Backup and swap files
+*.swp
+*.swo
+*.orig
+
+# System & application dumps
+.DS_Store?
+*.dmp
+*.stackdump
+*.crash
+
+# Instructor-only local materials
+curriculum_core/
+docs/templates/sh
+docs/templates/setup/
+docs/scripts/
+docs/json/
+
+
+# =====================================
+# End of .gitignore - maintained by Siraj
+# =====================================

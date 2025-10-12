@@ -1,0 +1,201 @@
+store_id,store_name,city,state,region
+1,RetailMart Nashik #1,Nashik,Maharashtra,South
+2,RetailMart Delhi #2,Delhi,Delhi,Central
+3,RetailMart Panaji #3,Panaji,Goa,North
+4,RetailMart Patna #4,Patna,Bihar,South
+5,RetailMart Hyderabad #5,Hyderabad,Telangana,South
+6,RetailMart Chandigarh #6,Chandigarh,Punjab,Central
+7,RetailMart Delhi #7,Delhi,Delhi,East
+8,RetailMart Ahmedabad #8,Ahmedabad,Gujarat,Central
+9,RetailMart Udaipur #9,Udaipur,Rajasthan,West
+10,RetailMart Nagpur #10,Nagpur,Maharashtra,South
+11,RetailMart Dehradun #11,Dehradun,Uttarakhand,East
+12,RetailMart Salem #12,Salem,Tamil Nadu,West
+13,RetailMart Mumbai #13,Mumbai,Maharashtra,West
+14,RetailMart Puri #14,Puri,Odisha,Central
+15,RetailMart Amritsar #15,Amritsar,Punjab,South
+16,RetailMart Puri #16,Puri,Odisha,South
+17,RetailMart Jamshedpur #17,Jamshedpur,Jharkhand,North
+18,RetailMart Bhubaneswar #18,Bhubaneswar,Odisha,Central
+19,RetailMart Jodhpur #19,Jodhpur,Rajasthan,Central
+20,RetailMart Gandhinagar #20,Gandhinagar,Gujarat,South
+21,RetailMart Rajkot #21,Rajkot,Gujarat,South
+22,RetailMart Pune #22,Pune,Maharashtra,East
+23,RetailMart Warangal #23,Warangal,Telangana,South
+24,RetailMart Jodhpur #24,Jodhpur,Rajasthan,Central
+25,RetailMart Puri #25,Puri,Odisha,Central
+26,RetailMart Lucknow #26,Lucknow,Uttar Pradesh,South
+27,RetailMart Noida #27,Noida,Uttar Pradesh,East
+28,RetailMart Dehradun #28,Dehradun,Uttarakhand,West
+29,RetailMart Meerut #29,Meerut,Uttar Pradesh,Central
+30,RetailMart Jaipur #30,Jaipur,Rajasthan,Central
+31,RetailMart Pune #31,Pune,Maharashtra,South
+32,RetailMart Ahmedabad #32,Ahmedabad,Gujarat,Central
+33,RetailMart Chennai #33,Chennai,Tamil Nadu,Central
+34,RetailMart Cuttack #34,Cuttack,Odisha,North
+35,RetailMart Gandhinagar #35,Gandhinagar,Gujarat,West
+36,RetailMart Amritsar #36,Amritsar,Punjab,West
+37,RetailMart Patiala #37,Patiala,Punjab,East
+38,RetailMart Varanasi #38,Varanasi,Uttar Pradesh,Central
+39,RetailMart Warangal #39,Warangal,Telangana,West
+40,RetailMart Haridwar #40,Haridwar,Uttarakhand,South
+41,RetailMart Warangal #41,Warangal,Telangana,South
+42,RetailMart Ahmedabad #42,Ahmedabad,Gujarat,East
+43,RetailMart Hyderabad #43,Hyderabad,Telangana,East
+44,RetailMart Patiala #44,Patiala,Punjab,West
+45,RetailMart Varanasi #45,Varanasi,Uttar Pradesh,South
+46,RetailMart Siliguri #46,Siliguri,West Bengal,Central
+47,RetailMart Gwalior #47,Gwalior,Madhya Pradesh,South
+48,RetailMart Port Blair #48,Port Blair,Andaman and Nicobar Islands,Central
+49,RetailMart Jodhpur #49,Jodhpur,Rajasthan,East
+50,RetailMart Dehradun #50,Dehradun,Uttarakhand,Central
+51,RetailMart Ahmedabad #51,Ahmedabad,Gujarat,Central
+52,RetailMart Pune #52,Pune,Maharashtra,East
+53,RetailMart Delhi #53,Delhi,Delhi,North
+54,RetailMart Thane #54,Thane,Maharashtra,North
+55,RetailMart Aizawl #55,Aizawl,Mizoram,West
+56,RetailMart Kolkata #56,Kolkata,West Bengal,West
+57,RetailMart Nagpur #57,Nagpur,Maharashtra,North
+58,RetailMart Dehradun #58,Dehradun,Uttarakhand,East
+59,RetailMart Patna #59,Patna,Bihar,East
+60,RetailMart New Delhi #60,New Delhi,Delhi,West
+61,RetailMart Bhubaneswar #61,Bhubaneswar,Odisha,East
+62,RetailMart Jodhpur #62,Jodhpur,Rajasthan,Central
+63,RetailMart Port Blair #63,Port Blair,Andaman and Nicobar Islands,Central
+64,RetailMart Chennai #64,Chennai,Tamil Nadu,North
+65,RetailMart Bhubaneswar #65,Bhubaneswar,Odisha,West
+66,RetailMart Howrah #66,Howrah,West Bengal,West
+67,RetailMart Haridwar #67,Haridwar,Uttarakhand,West
+68,RetailMart Leh #68,Leh,Ladakh,East
+69,RetailMart Salem #69,Salem,Tamil Nadu,North
+70,RetailMart New Delhi #70,New Delhi,Delhi,North
+71,RetailMart Indore #71,Indore,Madhya Pradesh,Central
+72,RetailMart Agra #72,Agra,Uttar Pradesh,Central
+73,RetailMart Nashik #73,Nashik,Maharashtra,East
+74,RetailMart Varanasi #74,Varanasi,Uttar Pradesh,North
+75,RetailMart Karimnagar #75,Karimnagar,Telangana,Central
+76,RetailMart Varanasi #76,Varanasi,Uttar Pradesh,South
+77,RetailMart Gandhinagar #77,Gandhinagar,Gujarat,Central
+78,RetailMart Panaji #78,Panaji,Goa,Central
+79,RetailMart Dhanbad #79,Dhanbad,Jharkhand,West
+80,RetailMart Delhi #80,Delhi,Delhi,North
+81,RetailMart Kanpur #81,Kanpur,Uttar Pradesh,East
+82,RetailMart Delhi #82,Delhi,Delhi,East
+83,RetailMart Agra #83,Agra,Uttar Pradesh,North
+84,RetailMart Agra #84,Agra,Uttar Pradesh,East
+85,RetailMart Kanpur #85,Kanpur,Uttar Pradesh,West
+86,RetailMart Ahmedabad #86,Ahmedabad,Gujarat,East
+87,RetailMart Bhubaneswar #87,Bhubaneswar,Odisha,West
+88,RetailMart Srinagar #88,Srinagar,Jammu & Kashmir,North
+89,RetailMart Delhi #89,Delhi,Delhi,Central
+90,RetailMart Bilaspur #90,Bilaspur,Chhattisgarh,West
+91,RetailMart Udaipur #91,Udaipur,Rajasthan,Central
+92,RetailMart Patna #92,Patna,Bihar,West
+93,RetailMart Pune #93,Pune,Maharashtra,North
+94,RetailMart Erode #94,Erode,Tamil Nadu,Central
+95,RetailMart Shimla #95,Shimla,Himachal Pradesh,Central
+96,RetailMart Rajkot #96,Rajkot,Gujarat,North
+97,RetailMart Cuttack #97,Cuttack,Odisha,South
+98,RetailMart Rourkela #98,Rourkela,Odisha,North
+99,RetailMart Bilaspur #99,Bilaspur,Chhattisgarh,North
+100,RetailMart Nashik #100,Nashik,Maharashtra,Central
+101,RetailMart Mysuru #101,Mysuru,Karnataka,North
+102,RetailMart Coimbatore #102,Coimbatore,Tamil Nadu,West
+103,RetailMart Hyderabad #103,Hyderabad,Telangana,West
+104,RetailMart Agartala #104,Agartala,Tripura,North
+105,RetailMart Jodhpur #105,Jodhpur,Rajasthan,Central
+106,RetailMart Indore #106,Indore,Madhya Pradesh,North
+107,RetailMart Ahmedabad #107,Ahmedabad,Gujarat,South
+108,RetailMart Mysuru #108,Mysuru,Karnataka,Central
+109,RetailMart Gwalior #109,Gwalior,Madhya Pradesh,North
+110,RetailMart Bhubaneswar #110,Bhubaneswar,Odisha,North
+111,RetailMart New Delhi #111,New Delhi,Delhi,Central
+112,RetailMart Udaipur #112,Udaipur,Rajasthan,East
+113,RetailMart Ranchi #113,Ranchi,Jharkhand,South
+114,RetailMart Thane #114,Thane,Maharashtra,North
+115,RetailMart Bilaspur #115,Bilaspur,Chhattisgarh,Central
+116,RetailMart Kolkata #116,Kolkata,West Bengal,Central
+117,RetailMart Trichy #117,Trichy,Tamil Nadu,Central
+118,RetailMart Dhanbad #118,Dhanbad,Jharkhand,Central
+119,RetailMart Cuttack #119,Cuttack,Odisha,West
+120,RetailMart Agartala #120,Agartala,Tripura,East
+121,RetailMart Udaipur #121,Udaipur,Rajasthan,South
+122,RetailMart Amritsar #122,Amritsar,Punjab,East
+123,RetailMart Noida #123,Noida,Uttar Pradesh,North
+124,RetailMart Amritsar #124,Amritsar,Punjab,South
+125,RetailMart Karimnagar #125,Karimnagar,Telangana,Central
+126,RetailMart Dehradun #126,Dehradun,Uttarakhand,Central
+127,RetailMart Ahmedabad #127,Ahmedabad,Gujarat,North
+128,RetailMart Karimnagar #128,Karimnagar,Telangana,East
+129,RetailMart Kolkata #129,Kolkata,West Bengal,South
+130,RetailMart Meerut #130,Meerut,Uttar Pradesh,East
+131,RetailMart Karimnagar #131,Karimnagar,Telangana,Central
+132,RetailMart Kota #132,Kota,Rajasthan,West
+133,RetailMart Imphal #133,Imphal,Manipur,North
+134,RetailMart Bhubaneswar #134,Bhubaneswar,Odisha,Central
+135,RetailMart Dhanbad #135,Dhanbad,Jharkhand,South
+136,RetailMart Ludhiana #136,Ludhiana,Punjab,Central
+137,RetailMart Bilaspur #137,Bilaspur,Chhattisgarh,South
+138,RetailMart Varanasi #138,Varanasi,Uttar Pradesh,South
+139,RetailMart Mangalore #139,Mangalore,Karnataka,South
+140,RetailMart Dehradun #140,Dehradun,Uttarakhand,West
+141,RetailMart Noida #141,Noida,Uttar Pradesh,South
+142,RetailMart Amritsar #142,Amritsar,Punjab,South
+143,RetailMart Ahmedabad #143,Ahmedabad,Gujarat,South
+144,RetailMart Kolkata #144,Kolkata,West Bengal,Central
+145,RetailMart Shillong #145,Shillong,Meghalaya,South
+146,RetailMart Chennai #146,Chennai,Tamil Nadu,North
+147,RetailMart Udaipur #147,Udaipur,Rajasthan,Central
+148,RetailMart Bengaluru #148,Bengaluru,Karnataka,North
+149,RetailMart Erode #149,Erode,Tamil Nadu,North
+150,RetailMart Srinagar #150,Srinagar,Jammu & Kashmir,South
+151,RetailMart Howrah #151,Howrah,West Bengal,West
+152,RetailMart Jodhpur #152,Jodhpur,Rajasthan,West
+153,RetailMart Trichy #153,Trichy,Tamil Nadu,West
+154,RetailMart Thane #154,Thane,Maharashtra,West
+155,RetailMart Cuttack #155,Cuttack,Odisha,South
+156,RetailMart Chennai #156,Chennai,Tamil Nadu,North
+157,RetailMart Leh #157,Leh,Ladakh,West
+158,RetailMart Shillong #158,Shillong,Meghalaya,North
+159,RetailMart Ludhiana #159,Ludhiana,Punjab,South
+160,RetailMart Chennai #160,Chennai,Tamil Nadu,North
+161,RetailMart Imphal #161,Imphal,Manipur,South
+162,RetailMart Rourkela #162,Rourkela,Odisha,South
+163,RetailMart Amritsar #163,Amritsar,Punjab,East
+164,RetailMart Lucknow #164,Lucknow,Uttar Pradesh,Central
+165,RetailMart Amritsar #165,Amritsar,Punjab,North
+166,RetailMart Hyderabad #166,Hyderabad,Telangana,North
+167,RetailMart Howrah #167,Howrah,West Bengal,North
+168,RetailMart Bhopal #168,Bhopal,Madhya Pradesh,Central
+169,RetailMart Mumbai #169,Mumbai,Maharashtra,West
+170,RetailMart Mysuru #170,Mysuru,Karnataka,Central
+171,RetailMart Gwalior #171,Gwalior,Madhya Pradesh,West
+172,RetailMart Udaipur #172,Udaipur,Rajasthan,West
+173,RetailMart Ludhiana #173,Ludhiana,Punjab,East
+174,RetailMart Bengaluru #174,Bengaluru,Karnataka,Central
+175,RetailMart Erode #175,Erode,Tamil Nadu,East
+176,RetailMart Gaya #176,Gaya,Bihar,West
+177,RetailMart Warangal #177,Warangal,Telangana,Central
+178,RetailMart Patna #178,Patna,Bihar,Central
+179,RetailMart Udupi #179,Udupi,Karnataka,West
+180,RetailMart Udaipur #180,Udaipur,Rajasthan,North
+181,RetailMart Surat #181,Surat,Gujarat,North
+182,RetailMart Rourkela #182,Rourkela,Odisha,West
+183,RetailMart Panaji #183,Panaji,Goa,Central
+184,RetailMart Dehradun #184,Dehradun,Uttarakhand,East
+185,RetailMart Warangal #185,Warangal,Telangana,Central
+186,RetailMart Chennai #186,Chennai,Tamil Nadu,Central
+187,RetailMart Gandhinagar #187,Gandhinagar,Gujarat,South
+188,RetailMart Nashik #188,Nashik,Maharashtra,South
+189,RetailMart Pune #189,Pune,Maharashtra,North
+190,RetailMart Jaipur #190,Jaipur,Rajasthan,East
+191,RetailMart Bhopal #191,Bhopal,Madhya Pradesh,South
+192,RetailMart Srinagar #192,Srinagar,Jammu & Kashmir,East
+193,RetailMart Muzaffarpur #193,Muzaffarpur,Bihar,East
+194,RetailMart Bhubaneswar #194,Bhubaneswar,Odisha,Central
+195,RetailMart Varanasi #195,Varanasi,Uttar Pradesh,West
+196,RetailMart Nagpur #196,Nagpur,Maharashtra,Central
+197,RetailMart Siliguri #197,Siliguri,West Bengal,West
+198,RetailMart Rourkela #198,Rourkela,Odisha,South
+199,RetailMart Imphal #199,Imphal,Manipur,East
+200,RetailMart Jaipur #200,Jaipur,Rajasthan,South

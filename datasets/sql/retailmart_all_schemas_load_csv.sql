@@ -1,0 +1,9 @@
+\c retailmart;
+\i 'datasets/sql/core_load_csv.sql'
+\i 'datasets/sql/customers_load_csv.sql'
+\i 'datasets/sql/products_load_csv.sql'
+\i 'datasets/sql/stores_load_csv.sql'
+\i 'datasets/sql/sales_load_csv.sql'
+\i 'datasets/sql/finance_load_csv.sql'
+\i 'datasets/sql/hr_load_csv.sql'
+\i 'datasets/sql/marketing_load_csv.sql'

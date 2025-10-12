@@ -1,0 +1,27 @@
+region_id,region_name,country,state
+1,North,India,Delhi
+2,North,India,Maharashtra
+3,East,India,Gujarat
+4,South,India,Karnataka
+5,South,India,Tamil Nadu
+6,South,India,Telangana
+7,North,India,West Bengal
+8,Central,India,Odisha
+9,North,India,Bihar
+10,Central,India,Uttar Pradesh
+11,West,India,Rajasthan
+12,North,India,Madhya Pradesh
+13,North,India,Chhattisgarh
+14,North,India,Jharkhand
+15,South,India,Punjab
+16,South,India,Himachal Pradesh
+17,Central,India,Uttarakhand
+18,Central,India,Assam
+19,North,India,Meghalaya
+20,Central,India,Tripura
+21,South,India,Goa
+22,Central,India,Mizoram
+23,West,India,Manipur
+24,South,India,Andaman and Nicobar Islands
+25,West,India,Ladakh
+26,Central,India,Jammu & Kashmir

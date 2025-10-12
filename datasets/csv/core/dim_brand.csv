@@ -1,0 +1,159 @@
+brand_id,brand_name,category_name
+1,Tata,Grocery
+2,Fortune,Grocery
+3,Aashirvaad,Grocery
+4,Amul,Grocery
+5,ITC,Grocery
+6,Nestle,Grocery
+7,Britannia,Grocery
+8,Parle,Grocery
+9,Patanjali,Grocery
+10,Mother Dairy,Grocery
+11,Samsung,Electronics
+12,Sony,Electronics
+13,LG,Electronics
+14,Philips,Electronics
+15,Boat,Electronics
+16,OnePlus,Electronics
+17,Apple,Electronics
+18,Mi,Electronics
+19,Dell,Electronics
+20,HP,Electronics
+21,Lenovo,Electronics
+22,Asus,Electronics
+23,Levis,Fashion
+24,H&M,Fashion
+25,Bata,Fashion
+26,Adidas,Fashion
+27,Puma,Fashion
+28,Nike,Fashion
+29,Raymond,Fashion
+30,Allen Solly,Fashion
+31,Van Heusen,Fashion
+32,Zara,Fashion
+33,Uniqlo,Fashion
+34,FabIndia,Fashion
+35,Dove,Personal Care
+36,Ponds,Personal Care
+37,Nivea,Personal Care
+38,Himalaya,Personal Care
+39,Mamaearth,Personal Care
+40,Wow,Personal Care
+41,Colgate,Personal Care
+42,Sensodyne,Personal Care
+43,Garnier,Personal Care
+44,L'Oreal,Personal Care
+45,Whirlpool,Home Appliances
+46,Godrej,Home Appliances
+47,Crompton,Home Appliances
+48,Havells,Home Appliances
+49,Bajaj,Home Appliances
+50,Philips,Home Appliances
+51,Voltas,Home Appliances
+52,Blue Star,Home Appliances
+53,Kenstar,Home Appliances
+54,IFB,Home Appliances
+55,Ikea,Furniture
+56,Godrej Interio,Furniture
+57,Urban Ladder,Furniture
+58,Pepperfry,Furniture
+59,Nilkamal,Furniture
+60,Durian,Furniture
+61,Hometown,Furniture
+62,Decathlon,Sports
+63,SG,Sports
+64,Yonex,Sports
+65,Nivia,Sports
+66,Cosco,Sports
+67,Adidas,Sports
+68,Puma,Sports
+69,Nike,Sports
+70,Li-Ning,Sports
+71,Reebok,Sports
+72,Lego,Toys
+73,Funskool,Toys
+74,Hot Wheels,Toys
+75,Barbie,Toys
+76,Mattel,Toys
+77,Fisher Price,Toys
+78,Play-Doh,Toys
+79,Classmate,Stationery
+80,Camlin,Stationery
+81,Faber-Castell,Stationery
+82,Luxor,Stationery
+83,Pilot,Stationery
+84,Reynolds,Stationery
+85,Navneet,Stationery
+86,Cello,Stationery
+87,Castrol,Automotive
+88,Shell,Automotive
+89,Mobil,Automotive
+90,Tata Motors,Automotive
+91,Mahindra,Automotive
+92,Hero,Automotive
+93,TVS,Automotive
+94,Honda,Automotive
+95,Bosch,Automotive
+96,Tanishq,Jewellery
+97,CaratLane,Jewellery
+98,PC Jeweller,Jewellery
+99,Reliance Jewels,Jewellery
+100,Malabar Gold,Jewellery
+101,Giva,Jewellery
+102,BlueStone,Jewellery
+103,Bata,Footwear
+104,Woodland,Footwear
+105,Liberty,Footwear
+106,Red Chief,Footwear
+107,Sparx,Footwear
+108,Puma,Footwear
+109,Nike,Footwear
+110,Adidas,Footwear
+111,Apollo Pharmacy,Pharmacy
+112,1mg,Pharmacy
+113,NetMeds,Pharmacy
+114,Cipla,Pharmacy
+115,Dr Reddys,Pharmacy
+116,Sun Pharma,Pharmacy
+117,Drools,Pet Care
+118,Pedigree,Pet Care
+119,Whiskas,Pet Care
+120,Heads Up For Tails,Pet Care
+121,Wiggles,Pet Care
+122,Royal Canin,Pet Care
+123,Nykaa,Beauty
+124,Maybelline,Beauty
+125,Lakme,Beauty
+126,MAC,Beauty
+127,Colorbar,Beauty
+128,Revlon,Beauty
+129,Faces Canada,Beauty
+130,Kay Beauty,Beauty
+131,Penguin,Books
+132,HarperCollins,Books
+133,Rupa,Books
+134,Scholastic,Books
+135,Bloomsbury,Books
+136,Sony PlayStation,Gaming
+137,Microsoft Xbox,Gaming
+138,Razer,Gaming
+139,Logitech G,Gaming
+140,HyperX,Gaming
+141,ASUS ROG,Gaming
+142,Trust Basket,Gardening
+143,Green Grow,Gardening
+144,Ugaoo,Gardening
+145,Plantix,Gardening
+146,Fertiline,Gardening
+147,Bisleri,Beverages
+148,Pepsi,Beverages
+149,Coca Cola,Beverages
+150,Real Juice,Beverages
+151,Paper Boat,Beverages
+152,Red Bull,Beverages
+153,Skybags,Travel
+154,American Tourister,Travel
+155,Safari,Travel
+156,Wildcraft,Travel
+157,VIP,Travel
+158,Aristocrat,Travel
