@@ -1,0 +1,1 @@
+{"name":"My-Widget","gridItemConfig":{"sizex":2,"sizey":1},"widget":{"insights-widget":{"type":{"line":{"dataDirection":"vertical","columnsAsLabels":true,"labelFirstColumn":false,"legendPosition":"top","dataType":"number"}},"queryFile":"/Users/shira/Documents/modules/sql/batches/21/week_05_advanced_sql/day_14/charts.sql"}}}
