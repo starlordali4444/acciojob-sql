@@ -73,3 +73,23 @@ LEFT JOIN sales.orders o ON d.date_key = o.order_date
 GROUP BY 
     d.date_key, d.year, d.month, d.month_name, 
     d.day_name, d.quarter, is_weekend
+
+Select * FROM
+    analytics.mv_monthly_sales_dashboard
+
+    total_revenue - prev_month_revenue) / NULLIF(prev_month_revenue, 0) * 100, 2) as mom_growth_pct
+
+
+Select year,month,total_revenue, prev_month_revenue,mom_growth_pct FROM
+    analytics.mv_monthly_sales_dashboard
+with date_wise_sale as (
+    select extract( year from order_date) as order_year,
+    extract( month from order_date) as order_month,sum(total_amount) as total_revenue
+    FROM sales.orders
+    group by extract( year from order_date),extract( month from order_date)
+)
+SELECT *,
+    SUM(total_revenue) OVER(partition by order_year order by order_month),
+    SUM(total_revenue) OVER(partition by order_year order by order_month ROWS UNBOUNDED PRECEDING),
+    AVG(total_revenue) OVER ( ORDER BY order_year, order_month ROWS BETWEEN 2 PRECEDING AND CURRENT ROW ) as moving_avg_3month
+from date_wise_sale

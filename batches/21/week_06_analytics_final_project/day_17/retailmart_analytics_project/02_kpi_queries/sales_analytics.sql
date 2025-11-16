@@ -55,6 +55,7 @@ ORDER BY date_key DESC;
 -- ---------------------------------------------
 -- 2. MONTHLY SALES DASHBOARD WITH TRENDS
 -- ---------------------------------------------
+DROP MATERIALIZED VIEW IF EXISTS analytics.mv_monthly_sales_dashboard;
 CREATE MATERIALIZED VIEW analytics.mv_monthly_sales_dashboard AS
 WITH monthly_base AS (
     SELECT 
@@ -71,7 +72,7 @@ WITH monthly_base AS (
     FROM sales.orders o
     JOIN core.dim_date d ON o.order_date = d.date_key
     JOIN sales.order_items oi ON o.order_id = oi.order_id
-    WHERE o.order_status = 'Completed'
+    WHERE o.order_status = 'Delivered'
     GROUP BY d.year, d.month, d.month_name, d.quarter
 ),
 growth_calculations AS (
@@ -146,15 +147,17 @@ CREATE OR REPLACE VIEW analytics.vw_sales_by_dayofweek AS
 SELECT 
     d.day_name,
     CASE d.day_name
-        WHEN 'Monday' THEN 1
-        WHEN 'Tuesday' THEN 2
-        WHEN 'Wednesday' THEN 3
-        WHEN 'Thursday' THEN 4
-        WHEN 'Friday' THEN 5
-        WHEN 'Saturday' THEN 6
-        WHEN 'Sunday' THEN 7
+        WHEN 'Mon' THEN 1
+        WHEN 'Tue' THEN 2
+        WHEN 'Wed' THEN 3
+        WHEN 'Thu' THEN 4
+        WHEN 'Fri' THEN 5
+        WHEN 'Sat' THEN 6
+        WHEN 'Sun' THEN 7
     END as day_order,
-    d.is_weekend,
+    CASE WHEN d.day_name in ('Sat','Sun') THEN 1
+    ELSE 0
+    END is_weekend,
     COUNT(DISTINCT o.order_id) as total_orders,
     ROUND(AVG(COUNT(DISTINCT o.order_id)) OVER (), 0) as avg_orders,
     SUM(o.total_amount) as total_revenue,
@@ -168,8 +171,8 @@ SELECT
     ) as variance_from_avg_pct
 FROM sales.orders o
 JOIN core.dim_date d ON o.order_date = d.date_key
-WHERE o.order_status = 'Completed'
-GROUP BY d.day_name, d.is_weekend
+WHERE o.order_status = 'Delivered'
+GROUP BY d.day_name, is_weekend
 ORDER BY day_order;
 
 
@@ -190,7 +193,7 @@ SELECT
         ELSE 'Night (10 PM-5 AM)'
     END as time_period
 FROM sales.orders o
-WHERE o.order_status = 'Completed'
+WHERE o.order_status = 'Delivered'
 GROUP BY EXTRACT(HOUR FROM o.order_date)
 ORDER BY hour_of_day;
 
@@ -215,7 +218,7 @@ SELECT
     ) as pct_of_transactions
 FROM sales.payments p
 JOIN sales.orders o ON p.order_id = o.order_id
-WHERE o.order_status = 'Completed'
+WHERE o.order_status = 'Delivered'
 GROUP BY p.payment_mode
 ORDER BY total_amount DESC;
 
@@ -233,7 +236,7 @@ WITH sales_data AS (
         SUM(o.total_amount) as gross_sales
     FROM sales.orders o
     JOIN core.dim_date d ON o.order_date = d.date_key
-    WHERE o.order_status = 'Completed'
+    WHERE o.order_status = 'Delivered'
     GROUP BY d.year, d.month, d.month_name
 ),
 returns_data AS (
@@ -300,7 +303,7 @@ SELECT
 FROM sales.orders o
 JOIN core.dim_date d ON o.order_date = d.date_key
 JOIN sales.order_items oi ON o.order_id = oi.order_id
-WHERE o.order_status = 'Completed'
+WHERE o.order_status = 'Delivered'
 GROUP BY d.year, d.quarter
 ORDER BY d.year DESC, d.quarter DESC;
 
@@ -318,8 +321,8 @@ SELECT
     ROUND(SUM(total_amount), 2) as total_revenue,
     ROUND(AVG(total_amount), 2) as avg_order_value
 FROM sales.orders
-WHERE order_date >= CURRENT_DATE - INTERVAL '30 days'
-    AND order_status = 'Completed'
+WHERE order_date >= CURRENT_DATE - INTERVAL '30 days' - INTERVAL '46 days'
+    AND order_status = 'Delivered'
 
 UNION ALL
 
@@ -330,8 +333,8 @@ SELECT
     ROUND(SUM(total_amount), 2),
     ROUND(AVG(total_amount), 2)
 FROM sales.orders
-WHERE order_date >= CURRENT_DATE - INTERVAL '7 days'
-    AND order_status = 'Completed'
+WHERE order_date >= CURRENT_DATE - INTERVAL '7 days' - INTERVAL '46 days'
+    AND order_status = 'Delivered'
 
 UNION ALL
 
@@ -342,7 +345,7 @@ SELECT
     ROUND(SUM(total_amount), 2),
     ROUND(AVG(total_amount), 2)
 FROM sales.orders
-WHERE order_date = CURRENT_DATE
-    AND order_status = 'Completed';
+WHERE order_date = CURRENT_DATE - INTERVAL '46 days'
+    AND order_status = 'Delivered';
 
 SELECT 'Sales Analytics Module Created Successfully!' as status;
