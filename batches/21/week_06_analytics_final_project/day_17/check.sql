@@ -1,0 +1,1 @@
+SELECT * FROM analytics.kpi_metadata;

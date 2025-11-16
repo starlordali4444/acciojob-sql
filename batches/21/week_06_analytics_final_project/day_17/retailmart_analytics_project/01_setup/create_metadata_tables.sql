@@ -1,1 +1,41 @@
---Create metadata table to track KPIs and refresh status
+-- Create metadata table to track KPIs and refresh status
+CREATE TABLE IF NOT EXISTS analytics.kpi_metadata (
+    kpi_id SERIAL PRIMARY KEY,
+    kpi_name VARCHAR(100) UNIQUE NOT NULL,
+    kpi_category VARCHAR(50),
+    description TEXT,
+    source_tables TEXT,
+    refresh_frequency VARCHAR(20),
+    last_refreshed TIMESTAMP,
+    row_count BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(50) DEFAULT CURRENT_USER
+);
+
+-- Create audit log table
+CREATE TABLE IF NOT EXISTS analytics.audit_log (
+    log_id SERIAL PRIMARY KEY,
+    operation VARCHAR(50),
+    table_name VARCHAR(100),
+    rows_affected BIGINT,
+    execution_time INTERVAL,
+    status VARCHAR(20),
+    error_message TEXT,
+    executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    executed_by VARCHAR(50) DEFAULT CURRENT_USER
+);
+
+-- Insert metadata for tracking
+INSERT INTO analytics.kpi_metadata (kpi_name, kpi_category, description, refresh_frequency)
+VALUES 
+    ('Sales Performance Dashboard', 'Sales', 'Monthly and daily sales trends with YoY comparison', 'Daily'),
+    ('Product Performance Analysis', 'Products', 'Top products, categories, and inventory metrics', 'Daily'),
+    ('Customer Retention Metrics', 'Customers', 'RFM analysis, churn prediction, and lifetime value', 'Weekly'),
+    ('Store Performance Scorecard', 'Stores', 'Store-wise revenue, expenses, and profitability', 'Daily'),
+    ('Executive Summary', 'Executive', 'High-level KPIs for management dashboard', 'Hourly');
+
+-- Grant appropriate permissions
+GRANT USAGE ON SCHEMA analytics TO PUBLIC;
+GRANT SELECT ON ALL TABLES IN SCHEMA analytics TO PUBLIC;
+
+SELECT 'Analytics infrastructure setup completed!' as status;
