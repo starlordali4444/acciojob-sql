@@ -171,6 +171,7 @@ SELECT
     category,
     ROUND(net_revenue, 2) as net_revenue,
     product_rank,
+    total_revenue,
     ROUND(100.0 * cumulative_revenue / total_revenue, 2) as cumulative_revenue_pct,
     ROUND(100.0 * product_rank / total_products, 2) as cumulative_products_pct,
     CASE 
@@ -195,7 +196,7 @@ WITH sales_last_90days AS (
     FROM sales.order_items oi
     JOIN sales.orders o ON oi.order_id = o.order_id
     WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 days'
-        AND o.order_status = 'Completed'
+        AND o.order_status = 'Delivered'
     GROUP BY prod_id
 ),
 current_inventory AS (
