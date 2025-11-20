@@ -148,102 +148,71 @@ ON analytics.mv_customer_lifetime_value(customer_status);
 \echo '      - Segments customers into behavioral groups'
 \echo '      - Provides recommended marketing actions'
 
+-- Drop the broken view if it exists
 DROP MATERIALIZED VIEW IF EXISTS analytics.mv_rfm_analysis CASCADE;
 
+-- Create the corrected RFM Analysis view
 CREATE MATERIALIZED VIEW analytics.mv_rfm_analysis AS
-WITH rfm_base AS (
-    -- Step 1: Calculate raw RFM metrics
+WITH customer_metrics AS (
     SELECT 
-        o.cust_id,
+        c.cust_id,
         c.full_name,
         c.city,
         c.state,
-        
-        -- R: Recency (days since last purchase - lower is better)
-        CURRENT_DATE - MAX(o.order_date) as recency_days,
-        
-        -- F: Frequency (number of orders - higher is better)
+        CURRENT_DATE - MAX(o.order_date) as days_since_last_order,
         COUNT(DISTINCT o.order_id) as frequency,
-        
-        -- M: Monetary (total spend - higher is better)
         SUM(o.total_amount) as monetary
-    FROM sales.orders o
-    JOIN customers.customers c ON o.cust_id = c.cust_id
-    WHERE o.order_status = 'Delivered'
-    GROUP BY o.cust_id, c.full_name, c.city, c.state
+    FROM customers.customers c
+    LEFT JOIN sales.orders o ON c.cust_id = o.cust_id 
+        AND o.order_status = 'Delivered'
+    GROUP BY c.cust_id, c.full_name, c.city, c.state
 ),
 rfm_scores AS (
-    -- Step 2: Convert raw metrics to 1-5 scores using NTILE
     SELECT 
         *,
-        -- Recency score (inverted - lower days = higher score)
-        NTILE(5) OVER (ORDER BY recency_days) as r_score_raw,        -- This gives 1=best, 5=worst
-        
-        -- Frequency score (higher frequency = higher score)
-        NTILE(5) OVER (ORDER BY frequency DESC) as f_score,          -- 5=best, 1=worst
-        
-        -- Monetary score (higher spend = higher score)
-        NTILE(5) OVER (ORDER BY monetary DESC) as m_score            -- 5=best, 1=worst
-    FROM rfm_base
-),
-rfm_calculated AS (
-    -- Step 3: Calculate final scores and concatenated RFM string
-    SELECT 
-        cust_id,
-        full_name,
-        city,
-        state,
-        recency_days,
-        frequency,
-        ROUND(monetary, 2) as monetary,
-        
-        -- Invert R score so 5 = best (most recent)
-        (6 - r_score_raw) as r_score,                                 -- Now 5=most recent, 1=least recent
-        f_score,
-        m_score,
-        
-        -- Combined RFM Score (e.g., "555" = best customer)
-        (6 - r_score_raw) || f_score || m_score as rfm_score,
-        
-        -- RFM Score as numeric (for sorting)
-        (6 - r_score_raw) + f_score + m_score as rfm_total
-    FROM rfm_scores
+        NTILE(5) OVER (ORDER BY days_since_last_order DESC) as r_score_raw,
+        NTILE(5) OVER (ORDER BY frequency) as f_score,
+        NTILE(5) OVER (ORDER BY monetary) as m_score
+    FROM customer_metrics
 )
 SELECT 
-    *,
-    
-    -- Customer Segment Classification (based on RFM patterns)
+    cust_id,
+    full_name,
+    city,
+    state,
+    days_since_last_order as recency_days,
+    frequency as order_count,
+    ROUND(monetary, 2) as total_spent,
+    (6 - r_score_raw) as recency_score,
+    f_score as frequency_score,
+    m_score as monetary_score,
+    -- FIX: Cast integers to TEXT before concatenation
+    (6 - r_score_raw)::TEXT || f_score::TEXT || m_score::TEXT as rfm_score,
     CASE 
-        WHEN r_score >= 4 AND f_score >= 4 AND m_score >= 4 THEN 'Champions'              -- Best customers: Recent, Frequent, High Spend
-        WHEN r_score >= 3 AND f_score >= 4 AND m_score >= 3 THEN 'Loyal Customers'       -- Regular buyers
-        WHEN r_score >= 4 AND f_score >= 2 AND m_score >= 2 THEN 'Potential Loyalists'   -- Recent buyers, building frequency
-        WHEN r_score >= 4 AND f_score <= 2 AND m_score <= 2 THEN 'New Customers'         -- Very recent, low frequency
-        WHEN r_score >= 3 AND f_score <= 2 AND m_score >= 3 THEN 'Promising'             -- Big spenders who buy infrequently
-        WHEN r_score = 3 AND f_score = 3 AND m_score = 3 THEN 'Needs Attention'          -- Average across all metrics
-        WHEN r_score <= 3 AND f_score <= 3 AND m_score <= 3 THEN 'About to Sleep'        -- Declining engagement
-        WHEN r_score <= 2 AND f_score >= 3 AND m_score >= 3 THEN 'At Risk'               -- Haven't purchased recently but were valuable
-        WHEN r_score <= 1 AND f_score >= 4 AND m_score >= 4 THEN 'Cannot Lose Them'      -- Lost best customers - urgent action needed
-        WHEN r_score <= 2 AND f_score <= 2 AND m_score <= 2 THEN 'Hibernating'           -- Very low engagement
-        WHEN r_score = 1 THEN 'Lost'                                                       -- Haven't purchased in very long time
-        ELSE 'Others'
+        WHEN (6 - r_score_raw) >= 4 AND f_score >= 4 AND m_score >= 4 THEN 'Champions'
+        WHEN (6 - r_score_raw) >= 3 AND f_score >= 3 AND m_score >= 3 THEN 'Loyal Customers'
+        WHEN (6 - r_score_raw) >= 4 AND f_score <= 2 THEN 'New Customers'
+        WHEN (6 - r_score_raw) >= 3 AND f_score <= 3 AND m_score <= 3 THEN 'Potential Loyalists'
+        WHEN (6 - r_score_raw) <= 2 AND f_score >= 3 THEN 'At Risk'
+        WHEN (6 - r_score_raw) <= 2 AND f_score <= 2 THEN 'Lost Customers'
+        WHEN m_score >= 4 AND f_score <= 2 THEN 'Big Spenders'
+        ELSE 'Need Attention'
     END as rfm_segment,
-    
-    -- Recommended Marketing Action
     CASE 
-        WHEN r_score >= 4 AND f_score >= 4 AND m_score >= 4 THEN 'Reward with VIP benefits'          -- Keep them happy
-        WHEN r_score >= 3 AND f_score >= 4 THEN 'Upsell premium products'                            -- Increase basket size
-        WHEN r_score >= 4 AND f_score >= 2 AND m_score >= 2 THEN 'Encourage repeat purchases'        -- Build habit
-        WHEN r_score >= 4 AND f_score <= 2 THEN 'Provide onboarding support'                         -- Help new customers
-        WHEN r_score <= 2 AND f_score >= 3 AND m_score >= 3 THEN 'Win-back campaign URGENT'          -- Don't lose them
-        WHEN r_score <= 1 AND f_score >= 4 THEN 'Personalized win-back offer'                        -- Special attention
-        WHEN r_score <= 2 AND f_score <= 2 THEN 'Reactivation campaign'                              -- General win-back
-        ELSE 'Standard engagement'
+        WHEN (6 - r_score_raw) >= 4 AND f_score >= 4 THEN 'Reward with VIP offers'
+        WHEN (6 - r_score_raw) <= 2 AND f_score >= 3 THEN 'Send win-back campaign'
+        WHEN (6 - r_score_raw) <= 2 AND f_score <= 2 THEN 'Consider re-engagement'
+        WHEN (6 - r_score_raw) >= 4 AND f_score <= 2 THEN 'Nurture with engagement'
+        ELSE 'Monitor and engage'
     END as recommended_action
-FROM rfm_calculated;
+FROM rfm_scores;
 
--- Create index for faster segment queries
+-- Create index
 CREATE INDEX IF NOT EXISTS idx_rfm_segment 
 ON analytics.mv_rfm_analysis(rfm_segment);
+
+-- Refresh the view
+REFRESH MATERIALIZED VIEW analytics.mv_rfm_analysis;
 
 \echo '      ✓ Materialized view created: mv_rfm_analysis'
 \echo '      ✓ Index created on (rfm_segment)'
@@ -667,6 +636,9 @@ $$ LANGUAGE plpgsql;
 \echo '[JSON 3/6] Creating function: get_rfm_segments_json()'
 \echo '           - Returns customer breakdown by RFM segment'
 
+-- Drop and recreate with correct column names
+DROP FUNCTION IF EXISTS analytics.get_rfm_segments_json() CASCADE;
+
 CREATE OR REPLACE FUNCTION analytics.get_rfm_segments_json()
 RETURNS JSON AS $$
 BEGIN
@@ -676,29 +648,30 @@ BEGIN
                 'segment', rfm_segment,
                 'customerCount', customer_count,
                 'totalRevenue', total_revenue,
-                'avgRecency', avg_recency,
+                'avgRecencyDays', avg_recency_days,
                 'avgFrequency', avg_frequency,
                 'avgMonetary', avg_monetary,
-                'pctOfCustomers', pct_of_customers,
                 'recommendedAction', recommended_action
-            ) ORDER BY total_revenue DESC
+            ) ORDER BY customer_count DESC
         )
         FROM (
             SELECT 
                 rfm_segment,
                 COUNT(*) as customer_count,
-                ROUND(SUM(monetary), 2) as total_revenue,
-                ROUND(AVG(recency_days), 0) as avg_recency,
-                ROUND(AVG(frequency), 2) as avg_frequency,
-                ROUND(AVG(monetary), 2) as avg_monetary,
-                ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) as pct_of_customers,
+                ROUND(SUM(total_spent), 2) as total_revenue,           -- ✅ FIXED: total_spent not monetary
+                ROUND(AVG(recency_days), 0) as avg_recency_days,       -- ✅ CORRECT
+                ROUND(AVG(order_count), 1) as avg_frequency,           -- ✅ CORRECT
+                ROUND(AVG(total_spent), 2) as avg_monetary,            -- ✅ FIXED: total_spent not monetary
                 MAX(recommended_action) as recommended_action
             FROM analytics.mv_rfm_analysis
             GROUP BY rfm_segment
-        ) rfm
+        ) segments
     );
 END;
 $$ LANGUAGE plpgsql;
+
+GRANT EXECUTE ON FUNCTION analytics.get_rfm_segments_json() TO PUBLIC;
+
 
 \echo '           ✓ Function created: get_rfm_segments_json()'
 

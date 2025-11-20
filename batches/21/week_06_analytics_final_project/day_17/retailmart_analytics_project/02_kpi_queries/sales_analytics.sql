@@ -227,7 +227,7 @@ SELECT
         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
     ), 2) as moving_avg_7day
 FROM analytics.vw_daily_sales_summary
-WHERE date_key >= CURRENT_DATE - INTERVAL '30 days'  -- Last 30 days only
+WHERE date_key >= CURRENT_DATE - INTERVAL '156 days'  -- Last 30 days only
 ORDER BY date_key DESC;
 
 \echo '       ✓ View created: vw_recent_sales_trend'

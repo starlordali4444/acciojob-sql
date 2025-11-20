@@ -1,0 +1,31 @@
+ERROR:  column "monetary" does not exist
+LINE 18:                 ROUND(SUM(monetary), 2) as total_revenue,
+                                   ^
+QUERY:  (
+        SELECT json_agg(
+            json_build_object(
+                'segment', rfm_segment,
+                'customerCount', customer_count,
+                'totalRevenue', total_revenue,
+                'avgRecency', avg_recency,
+                'avgFrequency', avg_frequency,
+                'avgMonetary', avg_monetary,
+                'pctOfCustomers', pct_of_customers,
+                'recommendedAction', recommended_action
+            ) ORDER BY total_revenue DESC
+        )
+        FROM (
+            SELECT 
+                rfm_segment,
+                COUNT(*) as customer_count,
+                ROUND(SUM(monetary), 2) as total_revenue,
+                ROUND(AVG(recency_days), 0) as avg_recency,
+                ROUND(AVG(frequency), 2) as avg_frequency,
+                ROUND(AVG(monetary), 2) as avg_monetary,
+                ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) as pct_of_customers,
+                MAX(recommended_action) as recommended_action
+            FROM analytics.mv_rfm_analysis
+            GROUP BY rfm_segment
+        ) rfm
+    )
+CONTEXT:  PL/pgSQL function analytics.get_rfm_segments_json() line 3 at RETURN
