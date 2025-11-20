@@ -1046,6 +1046,70 @@ async function createCohortVisualization() {
     }
 }
 
+// Cohort Retention Visualization
+// async function createCohortVisualization() {
+//     destroyChart('cohortChart');
+    
+//     const ctx = document.getElementById('cohortChart');
+//     if (!ctx) {
+//         console.warn('⚠️ Cohort chart canvas not found');
+//         return;
+//     }
+    
+//     try {
+//         // For now, create a simple retention summary chart
+//         // You can enhance this later with a full heatmap
+        
+//         const dummyData = {
+//             cohorts: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
+//             retention: [100, 45, 38, 32, 28, 25] // Mock retention percentages
+//         };
+        
+//         chartInstances['cohortChart'] = new Chart(ctx, {
+//             type: 'line',
+//             data: {
+//                 labels: dummyData.cohorts,
+//                 datasets: [{
+//                     label: 'Retention Rate (%)',
+//                     data: dummyData.retention,
+//                     borderColor: CHART_COLORS.info,
+//                     backgroundColor: CHART_COLORS.info + '20',
+//                     borderWidth: 3,
+//                     fill: true,
+//                     tension: 0.4,
+//                     pointRadius: 5,
+//                     pointHoverRadius: 7
+//                 }]
+//             },
+//             options: {
+//                 responsive: true,
+//                 plugins: {
+//                     legend: { display: true },
+//                     tooltip: {
+//                         callbacks: {
+//                             label: (context) => `Retention: ${context.parsed.y}%`
+//                         }
+//                     }
+//                 },
+//                 scales: {
+//                     y: {
+//                         beginAtZero: true,
+//                         max: 100,
+//                         ticks: {
+//                             callback: (value) => value + '%'
+//                         }
+//                     }
+//                 }
+//             }
+//         });
+        
+//         console.log('✅ Cohort chart created (placeholder)');
+        
+//     } catch (error) {
+//         console.error('❌ Error creating cohort visualization:', error);
+//     }
+// }
+
 
 /* ============================================
    TABLE LOADING FUNCTIONS
