@@ -76,9 +76,12 @@
 
 /* ============================================================
    SECTION C: SUBQUERY IN DML (25)
+   NOTE: RetailMart is READ-ONLY - run these DML statements in your OWN
+   accio_NN database, or preview the affected rows with a SELECT first
+   (the answer key shows the SELECT preview against RetailMart).
    ------------------------------------------------------------ */
 /* Q51. UPDATE orders SET status = 'reviewed' WHERE order_id IN (subquery). */
-/* Q52. UPDATE customers SET tier_id = (subquery from loyalty.members). */
+/* Q52. UPDATE customers SET tier = (the customer's loyalty tier, via subquery). */
 /* Q53. DELETE old_orders WHERE order_id IN (subquery). */
 /* Q54. INSERT INTO archive SELECT * FROM ... WHERE ... (subquery filter). */
 /* Q55. UPDATE products SET stock = (subquery from inventory). */
@@ -89,7 +92,7 @@
 /* Q60. UPDATE ad_campaigns SET active = false WHERE id IN (subquery low spend). */
 /* Q61. CREATE TABLE high_value AS SELECT * FROM sales.orders WHERE net_total > (subq). */
 /* Q62. ALTER TABLE ADD COLUMN tier_id DEFAULT (subquery)? Show how (immutable required). */
-/* Q63. UPSERT customers using subquery for new tier_id. */
+/* Q63. UPSERT customers using a subquery for the new tier. */
 /* Q64. MERGE INTO ... USING (subquery) ... */
 /* Q65. Bulk INSERT via subquery (INSERT SELECT). */
 /* Q66. Subquery-driven UPDATE setting multiple columns. */

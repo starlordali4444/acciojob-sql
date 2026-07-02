@@ -69,7 +69,7 @@
 /* Q45. Add LIMIT 1 + ORDER BY for safe scalar subquery. */
 /* Q46. Diagnose "subquery used in expression must return single column" error. */
 /* Q47. Diagnose "subquery in FROM must have an alias" error. */
-/* Q48. Use pg_stat_statements to find slow subquery patterns. */
+/* Q48. Write an IN-subquery query pattern (in prod, pg_stat_statements finds the slow ones). */
 /* Q49. Track "N+1" via repeated subqueries from app logs. */
 /* Q50. Audit slow queries with subqueries - top 10. */
 

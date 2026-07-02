@@ -15,7 +15,7 @@
      - JOIN + GROUP BY pitfalls
      - Self-anti-join
 
-   Structure: 25 Conceptual + 25 Non-equi/multi-col + 25 Anti-/semi-join + 25 Multi-table chains w/ performance
+   Structure: 25 Conceptual + 25 Non-equi/multi-col + 25 Anti-/semi-join + 25 Multi-table chains
    ============================================================ */
 
 /* ============================================================
@@ -50,31 +50,31 @@
 /* ============================================================
    SECTION B: NON-EQUI / MULTI-COL JOINS (25)
    ------------------------------------------------------------ */
-/* Q26. Range join: orders to ad_campaigns where order_date BETWEEN campaign.start_date AND campaign.end_date. */
-/* Q27. Range join: customer signup to loyalty.tier valid_from / valid_to history. */
-/* Q28. Range join: page_views to A/B test buckets active during that view. */
-/* Q29. Range join: pay_slip to active_tax_bracket for that month. */
-/* Q30. BETWEEN join: orders to ship-zones based on delivery_address. */
-/* Q31. Multi-col join: order_items to inventory on (warehouse_id, product_id). */
-/* Q32. Multi-col join: pay_slip to attendance on (employee_id, salary_month). */
+/* Q26. Range join: orders to campaigns running on the order_date (order_date BETWEEN start/end). */
+/* Q27. Range join: orders to promotions active on the order_date. */
+/* Q28. Range join: page_views to campaigns running during the view. */
+/* Q29. Range join: pay_slip to its tax bracket (gross_salary BETWEEN min_salary AND max_salary). */
+/* Q30. Range join: employee salary to its tax bracket. */
+/* Q31. Multi-col join: order_items (via their order's store) to products.inventory on (store_id, product_id). */
+/* Q32. Multi-col join: pay_slip to attendance on (employee_id, year). */
 /* Q33. Multi-col join: inventory_snapshot to supply_chain.shipment on (warehouse_id, product_id, date). */
-/* Q34. Multi-col join: campaign_attribution to orders on (customer_id, order_date). */
-/* Q35. Multi-col join: returns to orders on (cust_id, product_id). */
-/* Q36. INNER JOIN with > predicate: orders where net_total > campaign threshold. */
-/* Q37. Triangle JOIN: a + b > c constraint (e.g., bundle pricing). */
-/* Q38. JOIN where order_date is within 7 days of campaign start_date. */
-/* Q39. JOIN where customer's city = store's city (proxy for "local order"). */
-/* Q40. JOIN with composite key from CTE-derived label. */
-/* Q41. Range JOIN: SQL gaps-and-islands warmup (next/prev event matching). */
-/* Q42. JOIN orders to weather events on (city, date) for analysis. */
-/* Q43. JOIN customers to tier_history valid_from/valid_to for "tier at order time". */
-/* Q44. JOIN with date_trunc to align granularity. */
-/* Q45. JOIN ON expression: orders to seasons (CASE-based). */
-/* Q46. Self-equality on derived key: orders ON LEFT(order_id::text, 4) = LEFT(b.order_id::text, 4). */
-/* Q47. JOIN with substring matching: tickets ON product code prefix. */
-/* Q48. JOIN with array overlap: product tags && campaign tags. */
-/* Q49. JOIN with JSONB ?| array: campaign.tags ?| product.tag_array. */
-/* Q50. JOIN with tsvector match: review_text @@ campaign_keyword tsquery. */
+/* Q34. Multi-col join: order_items to returns on (order_id, prod_id). */
+/* Q35. Join + filter: orders to the customer's DEFAULT address (customer_id AND is_default). */
+/* Q36. INNER JOIN with a > predicate: line items priced above the product's list price. */
+/* Q37. Triangle JOIN: three products whose two cheaper prices exceed the third (bundle pricing). */
+/* Q38. JOIN where order_date is within 7 days of a campaign's start_date. */
+/* Q39. JOIN where the customer's default-address city = store's city (proxy for "local order"). */
+/* Q40. JOIN with a composite key derived in a CTE (clean city from addresses). */
+/* Q41. Range JOIN: gaps-and-islands warmup (each order to the customer's NEXT order). */
+/* Q42. JOIN orders to their shipment, keeping only Delivered shipments. */
+/* Q43. JOIN orders to the customer's loyalty tier ("tier at order time" proxy). */
+/* Q44. JOIN with date_trunc to align granularity (month). */
+/* Q45. JOIN ON expression: orders bucketed into seasons (CASE-based). */
+/* Q46. Self-equality on derived key: orders sharing the first 4 digits of order_id. */
+/* Q47. Prefix self-join: products sharing the first 3 letters of product_name. */
+/* Q48. Same-brand product pairs (self-join on brand_id). */
+/* Q49. Chain join: product -> brand -> category. */
+/* Q50. Join reviews to the product and the reviewing customer. */
 
 /* ============================================================
    SECTION C: ANTI-JOIN & SEMI-JOIN PATTERNS (25)
@@ -100,39 +100,39 @@
 /* Q69. Find brands present in EVERY region (relational division). */
 /* Q70. Find customers who placed orders in BOTH 2024 AND 2025. */
 /* Q71. Find products in inventory with no order_items linkage. */
-/* Q72. Find pay_slips with no matching attendance record. */
+/* Q72. Find pay_slips with no matching attendance record (same employee + year). */
 /* Q73. Find campaigns with no spend rows. */
-/* Q74. Find call_center.agents with NO calls in last 30 days. */
+/* Q74. Find employees (agents) with NO calls handled in the last 30 days. */
 /* Q75. Find shipments referencing deleted orders (FK enforce check). */
 
 /* ============================================================
-   SECTION D: MULTI-TABLE CHAINS + PERFORMANCE (25)
+   SECTION D: MULTI-TABLE CHAINS (3+ TABLES)
    ------------------------------------------------------------ */
 /* Q76. 6-table chain: order -> order_item -> product -> brand -> category -> supplier. */
-/* Q77. 5-table customer 360deg: customer -> order -> order_item -> product -> review. */
-/* Q78. 5-table workforce: employee -> pay_slip -> attendance -> department -> store. */
-/* Q79. 5-table marketing: ad_spend -> campaign -> attribution -> order -> customer. */
-/* Q80. 5-table inventory: warehouse -> snapshot -> product -> supplier -> shipment. */
-/* Q81. 5-table support: ticket -> customer -> product -> order -> agent. */
-/* Q82. Detect fan-out: COUNT(*) of orders JOIN order_items vs orders alone. */
+/* Q77. 5-table customer 360deg: customer -> order -> order_item -> product (+ review). */
+/* Q78. Workforce chain: employee -> pay_slip + department + store. */
+/* Q79. Marketing chain: campaign + ad spend + email engagement (clicks). */
+/* Q80. Inventory chain: snapshot -> warehouse + product + supplier (+ shipment). */
+/* Q81. Support chain: ticket -> customer + handling agent. */
+/* Q82. Detect fan-out: COUNT(*) of orders JOIN order_items vs distinct orders. */
 /* Q83. Subquery aggregation to avoid fan-out: pre-aggregate order_items into a CTE, then JOIN. */
-/* Q84. Fan-out fan-in: orders x order_items -> DISTINCT cust_id COUNT. */
-/* Q85. EXPLAIN ANALYZE a 5-table JOIN - read the plan top-to-bottom. */
-/* Q86. Force hash join with SET enable_nestloop = off - observe plan diff. */
-/* Q87. Show indexes the planner used (Index Cond / Filter) from EXPLAIN. */
-/* Q88. Compare query with and without an index - runtime difference. */
-/* Q89. Add a covering index for a hot 4-table JOIN - measure improvement. */
-/* Q90. Identify a SORT step in JOIN plan and tune work_mem to fit in memory. */
-/* Q91. Re-write a JOIN as EXISTS to avoid fan-out. */
-/* Q92. Convert correlated subquery to LEFT JOIN (rewrite for clarity). */
-/* Q93. Add stat targets (ALTER TABLE ... ALTER COLUMN ... SET STATISTICS 1000). */
-/* Q94. Use materialized CTE to force pre-computation. */
-/* Q95. Detect bad row estimates: actual rows vs planned rows in EXPLAIN ANALYZE. */
-/* Q96. Use pg_stat_statements to find which JOIN-heavy query is slowest. */
-/* Q97. Refactor 6-table JOIN with subquery-per-level to keep memory bounded. */
-/* Q98. Test JOIN performance with 1M-row table - sample row counts. */
-/* Q99. Build a "BI report query" that joins 7 tables and uses materialized views. */
-/* Q100. Audit query: produce a customer table with EVERY available metric across 8 schemas. */
+/* Q84. Fan-in: DISTINCT cust_id COUNT among multi-unit order lines. */
+/* Q85. 5-table count: customer -> order -> item -> product -> brand (line items per customer). */
+/* Q86. Items per order (orders x order_items, grouped). */
+/* Q87. Revenue by region: region -> store -> order. */
+/* Q88. Lifetime revenue per customer (customer -> order). */
+/* Q89. Order value from its items (order -> order_items). */
+/* Q90. Products per category: category -> brand -> product. */
+/* Q91. Re-write a JOIN as EXISTS (semi-join): customers with at least one order. */
+/* Q92. Convert a correlated subquery to a LEFT JOIN against a derived table. */
+/* Q93. Products per supplier (supplier -> product). */
+/* Q94. Use a MATERIALIZED CTE to pre-compute item totals, then join. */
+/* Q95. Returns with their order and customer. */
+/* Q96. Calls with their customer and handling agent. */
+/* Q97. Payments with their order and customer. */
+/* Q98. Orders since 2025 by store (store -> order, grouped). */
+/* Q99. Build a "BI report" query: region -> store -> order, aggregated. */
+/* Q100. Audit query: a customer table with metrics across multiple schemas (correlated subqueries). */
 
 /* ============================================================
    END OF JOINs Part 1 (Foundations) - HARD LEVEL (100 QUESTIONS)
