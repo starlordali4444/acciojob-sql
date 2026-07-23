@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Quiz Decks — RetailMart V3 SQL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0a0e17;--bg2:#111827;--card:#1a1f2e;--card-hover:#242b3d;--border:#2a3040;
+--text:#f1f5f9;--text2:#94a3b8;--muted:#64748b;--accent:#3b82f6;--accent2:#60a5fa;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+header{border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,14,23,0.85);backdrop-filter:blur(10px);z-index:10;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;}
+.brand{font-weight:800;font-size:1.1rem;}.brand .sql{color:var(--accent);}
+.back{font-size:0.85rem;font-weight:600;color:var(--accent2);border:1px solid var(--border);padding:0.5rem 0.9rem;border-radius:8px;}
+.back:hover{background:var(--card-hover);border-color:var(--accent);}
+.hero{padding:3rem 0 1.5rem;}
+.hero h1{font-size:2.2rem;font-weight:900;letter-spacing:-0.03em;margin-bottom:0.6rem;}
+.hero p{color:var(--text2);}
+.dl-all{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:#fff;font-weight:600;padding:0.6rem 1.1rem;border-radius:8px;margin:0.5rem 0 1.5rem;}
+.dl-all:hover{background:#2563eb;} .dl-all svg{width:16px;height:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0.9rem;padding-bottom:3rem;}
+.card{display:flex;align-items:center;gap:0.9rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;transition:all .15s;}
+.card:hover{background:var(--card-hover);border-color:var(--accent);transform:translateY(-2px);}
+.card .num{flex:none;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--border);border-radius:10px;font-weight:800;color:var(--accent2);font-size:0.95rem;}
+.card-main{flex:1;min-width:0;}
+.card h3{font-size:0.98rem;font-weight:700;}
+.card p{font-size:0.74rem;color:var(--muted);font-family:ui-monospace,monospace;margin-top:0.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.card-acts{display:flex;gap:0.4rem;flex:none;}
+.card-acts a{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:8px;color:var(--text2);background:var(--bg2);}
+.card-acts a:hover{color:#fff;border-color:var(--accent);background:rgba(59,130,246,0.15);}
+.card-acts svg{width:15px;height:15px;}
+footer{border-top:1px solid var(--border);padding:2rem 0;text-align:center;color:var(--muted);font-size:0.85rem;}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<div class="brand"><span class="sql">SQL</span> Mastery — Quiz</div>
+<a class="back" href="../">&larr; Course home</a>
+</div></header>
+<div class="wrap">
+<div class="hero">
+<h1>Quick Quiz Decks</h1>
+<p>Rapid-fire quiz decks (PDF) for self-testing — predict the output, spot the bug, explain the trap. Best used a day or two AFTER each class. Answers are included; try each question before peeking.</p>
+<a class="dl-all" href="../downloads/quiz-all.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Download all quizzes (ZIP, ~0.5 MB)</a>
+</div>
+<div class="grid">
+            <div class="card">
+                <span class="num">06</span>
+                <div class="card-main"><h3>Scalar Functions</h3><p>06-scalar-functions-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="06-scalar-functions-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="06-scalar-functions-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">07</span>
+                <div class="card-main"><h3>Conditional Logic</h3><p>07-conditional-logic-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="07-conditional-logic-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="07-conditional-logic-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">08</span>
+                <div class="card-main"><h3>Aggregates &amp; GROUP BY</h3><p>08-aggregates-grouping-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="08-aggregates-grouping-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="08-aggregates-grouping-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">09</span>
+                <div class="card-main"><h3>JOINs Part 1</h3><p>09-joins-part-1-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="09-joins-part-1-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="09-joins-part-1-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">10</span>
+                <div class="card-main"><h3>JOINs Part 2</h3><p>10-joins-part-2-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="10-joins-part-2-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="10-joins-part-2-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">11</span>
+                <div class="card-main"><h3>Self Join &amp; UNION</h3><p>11-self-join-union-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="11-self-join-union-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="11-self-join-union-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">12</span>
+                <div class="card-main"><h3>Subqueries Part 1</h3><p>12-subqueries-part-1-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="12-subqueries-part-1-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="12-subqueries-part-1-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">13</span>
+                <div class="card-main"><h3>Subqueries Part 2 + CTEs</h3><p>13-subqueries-part-2-ctes-quiz.pdf</p></div>
+                <div class="card-acts">
+                    <a href="13-subqueries-part-2-ctes-quiz.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="13-subqueries-part-2-ctes-quiz.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+</div>
+</div>
+<footer><div class="wrap">Built by Sayyed Siraj Ali · PostgreSQL · RetailMart V3</div></footer>
+</body>
+</html>

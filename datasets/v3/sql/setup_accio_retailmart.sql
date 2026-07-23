@@ -1,7 +1,7 @@
 --  ACCIO RETAILMART CLEAN (SOLUTION) SETUP SCRIPT
 -- Run this from the repository root: psql -U postgres -f datasets/v3/sql/setup_accio_retailmart.sql
 -- It creates a database named accio_retailmart_ (trailing underscore on purpose).
--- After loading, rename it in pgAdmin 4 to add your batch number (e.g. accio_retailmart_26).
+-- After loading, rename it in pgAdmin 4 to add your batch number (e.g. accio_retailmart_27 for batch 27).
 
 \set ON_ERROR_STOP on
 -- Force UTF-8 client encoding so the CSV \copy loads cleanly on any OS

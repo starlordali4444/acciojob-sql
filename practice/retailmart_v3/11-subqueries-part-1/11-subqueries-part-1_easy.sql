@@ -87,8 +87,8 @@
 /* Q59. Find products WHERE price = (SELECT MIN(price) FROM products.products). */
 /* Q60. Find employees WHERE salary = (SELECT MAX(salary) FROM stores.employees WHERE dept_id = 1). */
 /* Q61. Find orders WHERE net_total > (SELECT AVG(net_total) FROM sales.orders). */
-/* Q62. Find customers WHERE tier_id > (SELECT MIN(tier_id) FROM customers.customers). */
-/* Q63. Find pay_slips WHERE gross_salary > (SELECT AVG(gross_salary) FROM hr.pay_slips). */
+/* Q62. Find loyalty members WHERE tier_id > (SELECT MIN(tier_id) FROM loyalty.members). */
+/* Q63. Find pay_slips WHERE gross_salary > (SELECT AVG(gross_salary) FROM payroll.pay_slips). */
 /* Q64. Find shipments WHERE delivered_date IS NULL AND shipped_date < (SELECT MIN(shipped_date) + INTERVAL '7 days' FROM ...). */
 /* Q65. Find products WHERE supplier_id = ANY(SELECT supplier_id FROM products.suppliers WHERE city = 'Mumbai'). */
 /* Q66. Compare = ANY vs IN - same result. */

@@ -107,8 +107,8 @@ These **advanced / self-practice** topics are covered live **only if the batch i
 - **Practice (5)**: Products cheaper than category average; customers above the global avg spend; subquery in `SELECT` for "orders this month per customer"; rewrite an `IN`-subquery as a JOIN; spot the bug — subquery returning multiple rows where scalar expected.
 
 ### Subqueries Part 2 (Correlated, EXISTS) & CTEs
-- **Topics**: Correlated subqueries, `EXISTS` / `NOT EXISTS`, basic `WITH` (CTEs), recursive CTEs.
-- **Practice (6)**: Customers with at least one return; products never bought via `NOT EXISTS`; CTE-based churn (no order in 6 months); recursive CTE for org chart from `stores.employees`; recursive CTE for category tree; refactor a 3-level nested subquery into chained CTEs.
+- **Topics**: Correlated subqueries, `EXISTS` / `NOT EXISTS`, basic `WITH` (CTEs).
+- **Practice (4)**: Customers with at least one return; products never bought via `NOT EXISTS`; CTE-based churn (no order in 6 months); refactor a 3-level nested subquery into chained CTEs.
 
 ### Database Concepts for Analysts (Normalization, ACID, Transactions)
 - **Topics**: Concept-level only — no procedural code, no hands-on locking.
@@ -218,8 +218,7 @@ These **advanced / self-practice** topics are covered live **only if the batch i
   5. `EXISTS` vs `IN` rewrite question.
   6. Median + P95 per group (`PERCENTILE_CONT`).
   7. Pivot using `FILTER` clause.
-  8. Recursive CTE (org chart or category tree).
-  9. Read an `EXPLAIN ANALYZE` plan and identify the bottleneck.
+  8. Read an `EXPLAIN ANALYZE` plan and identify the bottleneck.
 - **Explain-your-query drill**: Each student picks a query from the course, walks through it line-by-line as if explaining to an interviewer.
 - **Practice (6)**: Mixed difficulty problems covering all major topics from Weeks 1–5.
 
