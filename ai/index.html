@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI + SQL - SQL Mastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0e17; color: #f1f5f9; font-family: 'Inter', sans-serif; min-height: 100vh; padding: 2rem; }
+        code, .mono { font-family: 'JetBrains Mono', monospace; }
+        a { color: #3b82f6; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #60a5fa; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.875rem; color: #94a3b8; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #94a3b8; }
+        .breadcrumb a:hover { color: #3b82f6; }
+        .breadcrumb .sep { color: #475569; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.5rem; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #1e293b; transition: all 0.2s; }
+        .back-link:hover { color: #3b82f6; border-color: #3b82f6; background: rgba(59,130,246,0.05); }
+        .back-link svg { width: 16px; height: 16px; }
+        .page-header { margin-bottom: 2.5rem; }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-header p { color: #94a3b8; font-size: 1.05rem; }
+        .motto { background: #1a1f2e; border: 1px solid #2a3040; border-left: 3px solid #3b82f6; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .motto p { color: #f1f5f9; font-size: 1.05rem; font-weight: 600; }
+        .motto span { color: #94a3b8; font-weight: 400; font-size: 0.9rem; display: block; margin-top: 0.35rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+        .card { background: #1a1f2e; border: 1px solid #2a3040; border-radius: 0.75rem; padding: 1.5rem; transition: all 0.25s ease; display: flex; flex-direction: column; gap: 0.75rem; }
+        .card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59,130,246,0.1); }
+        .card-icon { width: 40px; height: 40px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; background: rgba(59,130,246,0.1); }
+        .card-icon svg { width: 20px; height: 20px; color: #3b82f6; }
+        .card h3 { font-size: 1.1rem; font-weight: 600; }
+        .card h3 a { color: #f1f5f9; }
+        .card h3 a:hover { color: #3b82f6; }
+        .card p { color: #94a3b8; font-size: 0.875rem; line-height: 1.5; }
+        .tag { display: inline-block; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 9999px; background: rgba(59,130,246,0.15); color: #60a5fa; font-family: 'JetBrains Mono', monospace; align-self: flex-start; }
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+        <nav class="breadcrumb">
+            <a href="../">SQL Mastery</a>
+            <span class="sep">/</span>
+            <span>AI + SQL</span>
+        </nav>
+        <div class="page-header">
+            <h1>AI + SQL</h1>
+            <p>Use AI as your tutor, not your typist</p>
+        </div>
+        <div class="motto">
+            <p>First think. Then write. Then ask AI to review.</p>
+            <span>80% you: understand, design, write, predict. 20% AI: review, debug, hint, quiz.</span>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3><a href="./00_index.md">Start Here</a></h3>
+                <p>The 80-20 rule, what belongs to you and what belongs to the AI, and how the repo's built-in tutor rules work.</p>
+                <span class="tag">00_index.md</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <h3><a href="./setup_tools.md">Tool Setup</a></h3>
+                <p>Antigravity (free, recommended), Claude Code, Codex, Cursor - with honest notes on what each free tier really gives you. Plus a zero-install browser option.</p>
+                <span class="tag">setup_tools.md</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <h3><a href="./prompts_cheatsheet.md">Prompt Cheatsheet</a></h3>
+                <p>8 copy-paste templates: debug with hints, senior-style review, interview mode, fresh practice generation, fake database, and more.</p>
+                <span class="tag">prompts_cheatsheet.md</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+                <h3><a href="../AGENTS.md">The Tutor Rules</a></h3>
+                <p>The AGENTS.md file at the repo root. Every AI coding tool you open on this folder reads it and switches to tutor mode automatically.</p>
+                <span class="tag">AGENTS.md</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
