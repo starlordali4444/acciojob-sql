@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RetailMart V3 · Enterprise Analytics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>try{var m=localStorage.getItem('rm-theme')||'auto';var h=new Date().getHours();document.documentElement.dataset.theme=(m==='auto')?((h>=7&&h<19)?'light':'dark'):m;}catch(e){document.documentElement.dataset.theme='light';}</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  </head>
+  <body>
+    <div id="welcomeOverlay" class="welcome" title="Click to enter">
+      <div class="welcome-inner">
+        <div class="welcome-mark"><i class="ti ti-building-store" aria-hidden="true"></i></div>
+        <h1 class="welcome-title">RetailMart <span class="grad">V3</span></h1>
+        <p class="welcome-sub">Enterprise Analytics Platform</p>
+        <div class="welcome-stats">
+          <div><b data-count="16">0</b><span>Schemas</span></div>
+          <div><b data-count="55">0</b><span>Tables</span></div>
+          <div><b data-count="677" data-pre="₹" data-post=" Cr">0</b><span>Revenue</span></div>
+        </div>
+        <div class="welcome-bars"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="welcome-hint">Preparing your dashboard…</div>
+      </div>
+    </div>
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Loading dashboard...</p>
+    </div>
+    <header class="header">
+      <div class="header-left">
+        <div class="brand-mark"><i class="ti ti-building-store" aria-hidden="true"></i></div>
+        <div>
+          <h1>RetailMart <span class="grad">V3</span> Analytics</h1>
+          <span class="subtitle">Enterprise analytics platform · 16 schemas · 55 tables</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="freshness-text">Loading…</span>
+        <button id="themeToggle" class="btn btn-icon" title="Toggle light / dark" aria-label="Toggle light / dark theme"><i class="ti ti-moon" aria-hidden="true"></i></button>
+        <button id="alertBadge" class="btn btn-alert" title="Active alerts" aria-label="Active alerts"><i class="ti ti-bell" aria-hidden="true"></i><span class="alert-count">0</span></button>
+        <button id="btnRefresh" class="btn btn-primary"><i class="ti ti-refresh" aria-hidden="true"></i> Refresh</button>
+      </div>
+    </header>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="executive"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Executive</button>
+      <button class="tab-btn" data-tab="sales"><i class="ti ti-cash" aria-hidden="true"></i> Sales</button>
+      <button class="tab-btn" data-tab="customers"><i class="ti ti-users" aria-hidden="true"></i> Customers</button>
+      <button class="tab-btn" data-tab="products"><i class="ti ti-package" aria-hidden="true"></i> Products</button>
+      <button class="tab-btn" data-tab="stores"><i class="ti ti-building-store" aria-hidden="true"></i> Stores</button>
+      <button class="tab-btn" data-tab="operations"><i class="ti ti-truck-delivery" aria-hidden="true"></i> Operations</button>
+      <button class="tab-btn" data-tab="marketing"><i class="ti ti-speakerphone" aria-hidden="true"></i> Marketing</button>
+      <button class="tab-btn" data-tab="finance"><i class="ti ti-businessplan" aria-hidden="true"></i> Finance &amp; HR</button>
+      <button class="tab-btn" data-tab="audit"><i class="ti ti-shield-lock" aria-hidden="true"></i> Audit</button>
+      <button class="tab-btn" data-tab="supplychain"><i class="ti ti-building-factory" aria-hidden="true"></i> Supply Chain</button>
+      <button class="tab-btn" data-tab="schema"><i class="ti ti-schema" aria-hidden="true"></i> Schema</button>
+    </nav>
+    <main class="main-content">
+      <section id="tab-executive" class="tab-content active">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiTotalRevenue"><div class="kpi-icon">💰</div><div class="kpi-label">Total Revenue</div><div class="kpi-value">--</div><div class="kpi-change">--</div></div>
+          <div class="kpi-card" id="kpiTotalOrders"><div class="kpi-icon">📦</div><div class="kpi-label">Total Orders</div><div class="kpi-value">--</div><div class="kpi-change">--</div></div>
+          <div class="kpi-card" id="kpiTotalCustomers"><div class="kpi-icon">👥</div><div class="kpi-label">Total Customers</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiAvgOrderValue"><div class="kpi-icon">🛒</div><div class="kpi-label">Avg Order Value</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiRevenue30d"><div class="kpi-icon">📈</div><div class="kpi-label">Revenue (30 Days)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiAvgDailyRevenue"><div class="kpi-icon">📅</div><div class="kpi-label">Avg Daily Revenue</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>📈 Revenue Trend (Last 12 Months)</h3><canvas id="chartRevenueTrend"></canvas></div>
+          <div class="chart-card"><h3>🥧 Revenue by Category</h3><canvas id="chartCategoryRevenue"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>📊 Orders by Status</h3><canvas id="chartOrderStatus"></canvas></div>
+          <div class="chart-card"><h3>🌍 Revenue by Region</h3><canvas id="chartRevenueByRegion"></canvas></div>
+        </div>
+        <div class="tables-grid">
+          <div class="table-card"><h3>🏆 Top 10 Products</h3><table id="tableTopProducts"><thead><tr><th>#</th><th>Product</th><th>Category</th><th>Revenue</th></tr></thead><tbody></tbody></table></div>
+          <div class="table-card"><h3>⭐ Top 10 Customers</h3><table id="tableTopCustomers"><thead><tr><th>#</th><th>Customer</th><th>City</th><th>Total Spent</th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </section>
+      <section id="tab-sales" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiSalesRev30"><div class="kpi-icon">💰</div><div class="kpi-label">Revenue (30 Days)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiSalesOrders30"><div class="kpi-icon">📦</div><div class="kpi-label">Orders (30 Days)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiSalesAov30"><div class="kpi-icon">🛒</div><div class="kpi-label">AOV (30 Days)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiSalesDailyOrders"><div class="kpi-icon">📅</div><div class="kpi-label">Avg Daily Orders</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>📅 Daily Sales (Last 30 Days)</h3><canvas id="chartDailySales"></canvas></div>
+          <div class="chart-card"><h3>📆 Sales by Day of Week</h3><canvas id="chartDayOfWeek"></canvas></div>
+          <div class="chart-card"><h3>💳 Payment Methods</h3><canvas id="chartPaymentModes"></canvas></div>
+          <div class="chart-card"><h3>📊 Quarterly Performance</h3><canvas id="chartQuarterly"></canvas></div>
+          <div class="chart-card"><h3>📈 Monthly Revenue</h3><canvas id="chartSalesMonthly"></canvas></div>
+          <div class="chart-card"><h3>📦 Orders by Status</h3><canvas id="chartSalesOrderStatus"></canvas></div>
+        </div>
+      </section>
+      <section id="tab-customers" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiCustTotal"><div class="kpi-icon">👥</div><div class="kpi-label">Total Customers</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiCustNew"><div class="kpi-icon">✨</div><div class="kpi-label">New (30 Days)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiCustLoyalty"><div class="kpi-icon">🏅</div><div class="kpi-label">Loyalty Members</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiCustChampions"><div class="kpi-icon">🏆</div><div class="kpi-label">Champions (RFM)</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>🎯 RFM Segments</h3><canvas id="chartRFMSegments"></canvas></div>
+          <div class="chart-card"><h3>💎 CLV Tier Distribution</h3><canvas id="chartCLVTiers"></canvas></div>
+          <div class="chart-card"><h3>📈 Registration Trends</h3><canvas id="chartRegistrationTrends"></canvas></div>
+          <div class="chart-card"><h3>⚠️ Churn Risk Distribution</h3><canvas id="chartChurnRisk"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>🏅 Loyalty Tier Members</h3><canvas id="chartLoyaltyTiers"></canvas></div>
+          <div class="chart-card"><h3>👥 Loyalty Members vs Non-Members Revenue</h3><canvas id="chartLoyaltyROI"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>🗺️ Top States by Revenue</h3><canvas id="chartTopStates"></canvas></div>
+          <div class="chart-card"><h3>🫧 RFM Segments — Recency × Frequency</h3><canvas id="chartRfmBubble"></canvas></div>
+        </div>
+        <div class="table-card"><h3>🚨 High-Priority Churn Risk Customers</h3><table id="tableChurnRisk"><thead><tr><th>Customer</th><th>Tier</th><th>Total Spent</th><th>Days Inactive</th><th>Recommended Action</th></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section id="tab-products" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiProdCategories"><div class="kpi-icon">🗂️</div><div class="kpi-label">Categories</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiProdBrands"><div class="kpi-icon">🏷️</div><div class="kpi-label">Brands</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiProdClassA"><div class="kpi-icon">🅰️</div><div class="kpi-label">Class-A SKUs</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiProdOOS"><div class="kpi-icon">❌</div><div class="kpi-label">Out of Stock</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>🏆 Top Products by Revenue</h3><canvas id="chartTopProductsBar"></canvas></div>
+          <div class="chart-card"><h3>📊 ABC Analysis</h3><canvas id="chartABCPie"></canvas></div>
+          <div class="chart-card"><h3>📈 Category Performance</h3><canvas id="chartCategoryPerformance"></canvas></div>
+          <div class="chart-card"><h3>📦 Inventory Status</h3><canvas id="chartInventoryStatus"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>🏷️ Top Brands by Revenue</h3><canvas id="chartTopBrands"></canvas></div>
+          <div class="chart-card"><h3>⭐ Brand Rating vs Revenue</h3><canvas id="chartBrandScatter"></canvas></div>
+        </div>
+        <div class="table-card"><h3>📋 Product Details</h3><table id="tableProductDetails"><thead><tr><th>#</th><th>Product</th><th>Category</th><th>Brand</th><th>Revenue</th><th>Units</th><th>Rating</th><th>Stock</th></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section id="tab-stores" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiStoreTotal"><div class="kpi-icon">🏪</div><div class="kpi-label">Total Stores</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiStoreRegions"><div class="kpi-icon">🌍</div><div class="kpi-label">Regions</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiStoreRevenue"><div class="kpi-icon">💰</div><div class="kpi-label">Store Revenue</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiStoreMargin"><div class="kpi-icon">📈</div><div class="kpi-label">Avg Margin</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>🌍 Regional Performance</h3><canvas id="chartRegionalPerformance"></canvas></div>
+          <div class="chart-card"><h3>🏪 Store Rankings</h3><canvas id="chartStoreRankings"></canvas></div>
+          <div class="chart-card"><h3>📡 Region Comparison</h3><canvas id="chartRegionRadar"></canvas></div>
+          <div class="chart-card"><h3>🏅 Stores by Performance Tier</h3><canvas id="chartStoreTiers"></canvas></div>
+        </div>
+        <div class="table-card"><h3>📊 Store Scorecard</h3><table id="tableStoreScorecard"><thead><tr><th>#</th><th>Store</th><th>City</th><th>Region</th><th>Revenue</th><th>Profit</th><th>Margin</th><th>Tier</th></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section id="tab-operations" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiOnTimeDelivery"><div class="kpi-icon">✅</div><div class="kpi-label">Delivery SLA</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiAvgDeliveryDays"><div class="kpi-icon">⏱️</div><div class="kpi-label">Avg Delivery Days</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiReturnRate"><div class="kpi-icon">↩️</div><div class="kpi-label">Return Rate</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiTotalRefunds"><div class="kpi-icon">💸</div><div class="kpi-label">Total Refunds</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiOpenTickets"><div class="kpi-icon">🎫</div><div class="kpi-label">Open Tickets</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiAvgSentiment"><div class="kpi-icon">😊</div><div class="kpi-label">Call Sentiment</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>📈 Delivery SLA Trend</h3><canvas id="chartDeliverySLA"></canvas></div>
+          <div class="chart-card"><h3>🚚 Courier Performance</h3><canvas id="chartCourierPerformance"></canvas></div>
+          <div class="chart-card"><h3>🔄 Return Reasons</h3><canvas id="chartReturnReasons"></canvas></div>
+          <div class="chart-card"><h3>📞 Call Sentiment by Reason</h3><canvas id="chartCallSentiment"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>🎯 On-Time Delivery SLA</h3><canvas id="chartSlaGauge"></canvas></div>
+          <div class="chart-card"><h3>🎫 Tickets by Category</h3><canvas id="chartTicketsByCategory"></canvas></div>
+        </div>
+      </section>
+      <section id="tab-marketing" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiMktCampaigns"><div class="kpi-icon">📢</div><div class="kpi-label">Campaigns</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiMktSpend"><div class="kpi-icon">💸</div><div class="kpi-label">Ad Spend</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiMktPageViews"><div class="kpi-icon">🌐</div><div class="kpi-label">Page Views</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiMktOpenRate"><div class="kpi-icon">📧</div><div class="kpi-label">Email Open Rate</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>📊 Campaign ROI</h3><canvas id="chartCampaignROI"></canvas></div>
+          <div class="chart-card"><h3>📢 Platform Spend Distribution</h3><canvas id="chartChannelPerformance"></canvas></div>
+          <div class="chart-card"><h3>📧 Email Engagement</h3><canvas id="chartEmailEngagement"></canvas></div>
+          <div class="chart-card"><h3>🌐 Web Traffic (Last 30 Days)</h3><canvas id="chartWebTraffic"></canvas></div>
+          <div class="chart-card"><h3>📱 Device Breakdown</h3><canvas id="chartDeviceBreakdown"></canvas></div>
+          <div class="chart-card"><h3>🔗 Event Type Funnel</h3><canvas id="chartEventFunnel"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>🫧 Campaign Spend vs Revenue</h3><canvas id="chartCampaignScatter"></canvas></div>
+          <div class="chart-card"><h3>📄 Top Pages by Views</h3><canvas id="chartTopPages"></canvas></div>
+        </div>
+        <div class="table-card"><h3>📋 Campaign Details</h3><table id="tableCampaigns"><thead><tr><th>Campaign</th><th>Status</th><th>Budget</th><th>Spend</th><th>Platforms</th><th>Orders</th><th>Revenue</th><th>ROI</th></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section id="tab-finance" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiFinRevenue"><div class="kpi-icon">💰</div><div class="kpi-label">Revenue (12M)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiFinExpenses"><div class="kpi-icon">💸</div><div class="kpi-label">Expenses (12M)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiFinProfit"><div class="kpi-icon">📈</div><div class="kpi-label">Net Profit (12M)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiFinMargin"><div class="kpi-icon">🎯</div><div class="kpi-label">Profit Margin</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>📈 Monthly P&L Trend</h3><canvas id="chartPnLTrend"></canvas></div>
+          <div class="chart-card"><h3>🥧 Expense Category Breakdown</h3><canvas id="chartExpenseBreakdown"></canvas></div>
+          <div class="chart-card"><h3>👷 Attendance by Department</h3><canvas id="chartAttendance"></canvas></div>
+          <div class="chart-card"><h3>💰 Payroll by Department</h3><canvas id="chartPayrollDept"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>📉 Profit Margin Trend</h3><canvas id="chartProfitMargin"></canvas></div>
+          <div class="chart-card"><h3>💵 Payroll Trend — Gross vs Net</h3><canvas id="chartPayrollTrend"></canvas></div>
+        </div>
+        <div class="table-card"><h3>📊 Salary Analysis by Department & Role</h3><table id="tableSalaryAnalysis"><thead><tr><th>Department</th><th>Role</th><th>Employees</th><th>Avg Salary</th><th>Median Salary</th><th>Total Payroll</th><th>% of Total</th></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section id="tab-audit" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiSystemHealth"><div class="kpi-icon">🛡️</div><div class="kpi-label">System Health</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiErrorRate"><div class="kpi-icon">⚠️</div><div class="kpi-label">Error Rate (24h)</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiAvgApiResponse"><div class="kpi-icon">⚡</div><div class="kpi-label">Avg API Response</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiRecordChanges"><div class="kpi-icon">📝</div><div class="kpi-label">Record Changes (24h)</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card large"><h3>📈 System Health Trend (30 Days)</h3><canvas id="chartHealthTrend"></canvas></div>
+          <div class="chart-card"><h3>🔴 Errors by Service</h3><canvas id="chartErrorsByService"></canvas></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>⚡ API Latency — Avg vs P95</h3><canvas id="chartApiLatency"></canvas></div>
+          <div class="chart-card"><h3>🫧 Failure Rate vs Request Volume</h3><canvas id="chartApiFailScatter"></canvas></div>
+        </div>
+        <div class="table-card"><h3>⚡ API Endpoint Performance</h3><table id="tableApiPerformance"><thead><tr><th>Endpoint</th><th>Method</th><th>Requests</th><th>Failures</th><th>Failure %</th><th>Avg (ms)</th><th>P95 (ms)</th><th>Health</th></tr></thead><tbody></tbody></table></div>
+        <div class="table-card"><h3>🚨 Suspicious Activity</h3><table id="tableSuspiciousActivity"><thead><tr><th>Detection Type</th><th>Employee</th><th>Detail</th><th>Time</th><th>Flag</th></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section id="tab-supplychain" class="tab-content">
+        <div class="kpi-cards">
+          <div class="kpi-card" id="kpiWarehouses"><div class="kpi-icon">🏭</div><div class="kpi-label">Warehouses</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiActiveSuppliers"><div class="kpi-icon">🚛</div><div class="kpi-label">Active Suppliers</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiTotalProduced"><div class="kpi-icon">⚙️</div><div class="kpi-label">Units Produced</div><div class="kpi-value">--</div></div>
+          <div class="kpi-card" id="kpiRejectRate"><div class="kpi-icon">❌</div><div class="kpi-label">Reject Rate</div><div class="kpi-value">--</div></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>📊 Supplier Reliability (On-Time %)</h3><canvas id="chartSupplierSLA"></canvas></div>
+          <div class="chart-card"><h3>🏭 Production Line Efficiency</h3><canvas id="chartProductionEfficiency"></canvas></div>
+          <div class="chart-card"><h3>📦 Warehouse Units</h3><canvas id="chartWarehouseUnits"></canvas></div>
+          <div class="chart-card"><h3>🏅 Supplier Rating Mix</h3><canvas id="chartSupplierRating"></canvas></div>
+        </div>
+        <div class="tables-grid">
+          <div class="table-card"><h3>📦 Warehouse Inventory Status</h3><table id="tableWarehouses"><thead><tr><th>Warehouse</th><th>City</th><th>Region</th><th>Products</th><th>Total Units</th><th>Pending Inbound</th></tr></thead><tbody></tbody></table></div>
+          <div class="table-card"><h3>⚙️ Production Quality Issues</h3><table id="tableQualityIssues"><thead><tr><th>Product</th><th>Category</th><th>Produced</th><th>Rejected</th><th>Reject %</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </section>
+      <section id="tab-schema" class="tab-content">
+        <div class="schema-hero" id="schemaHero"></div>
+        <p class="schema-intro">Every chart on this dashboard traces back to the RetailMart V3 source database. Here is the full data model — all 16 schemas and 55 base tables — with live row counts and the dashboard view each table powers. Click a tab pill to jump to where a table is used.</p>
+        <div class="schema-grid" id="schemaGrid"></div>
+      </section>
+    </main>
+    <div id="alertModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header"><h2>🔔 Active Alerts</h2><button id="closeModal" class="btn-close">&times;</button></div>
+        <div id="alertModalBody" class="modal-body"></div>
+      </div>
+    </div>
+    <footer class="footer"><span id="footerTimestamp">RetailMart V3 Analytics | Sayyed Siraj Ali | PostgreSQL 18</span></footer>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
